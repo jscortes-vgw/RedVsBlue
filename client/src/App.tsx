@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+interface MyButtonProps {
+  /** The text to display inside the button */
+  title: string;
+  /** Whether the button can be interacted with */
+  disabled: boolean;
+}
+
+function MyButton({ title, disabled }: MyButtonProps) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button disabled={disabled}>{title}</button>
   );
 }
 
-export default App;
+export const App: React.FC = () => {
+  return (
+    <div>
+      <h1>Welcome to my app</h1>
+      <MyButton title="I'm a disabled button" disabled={true}/>
+    </div>
+  );
+}
