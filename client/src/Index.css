@@ -1,4 +1,5 @@
 body {
     /* background: antiquewhite; */
     background-image: url(./assets/chumba.png);
+    background-size: cover;
 }

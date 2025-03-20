@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Fab, Menu, MenuItem, Button } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
+import { getBattlegrounds } from '../../services';
 
-const FloatingButtonWithMenu: React.FC = () => {
+interface Props {
+    isBgOpen: boolean
+    setIsResultModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const FloatingButtonWithMenu: React.FC<Props> = ({setIsResultModalOpen, isBgOpen}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [battlegroundsData, setBattlegroundsData] = useState<Promise<any>[]>([])
+
+  useEffect(() => {
+    (async () => {
+        try {
+            const data = await getBattlegrounds()
+            setBattlegroundsData(data)
+        } catch (err) {
+            console.log(err)
+        }
+    })();
+  }, [])
 
   // Open menu
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -15,6 +33,14 @@ const FloatingButtonWithMenu: React.FC = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  function handleOpenResultModal() {
+    setIsResultModalOpen(true);
+  }
+
+  function handleCloseResultModal() {
+    setIsResultModalOpen(false);
+  }
 
   return (
     <div>
@@ -42,8 +68,10 @@ const FloatingButtonWithMenu: React.FC = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>
-          <Button variant="contained" color="primary">Join live event</Button>
+        <MenuItem onClick={handleClose} sx={{}}>
+            <Button variant="contained" color="primary" onClick={handleOpenResultModal}>
+                {isBgOpen ? 'Join live event' : 'See Team Progress'}
+            </Button>
         </MenuItem>
       </Menu>
     </div>

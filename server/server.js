@@ -121,7 +121,7 @@ const calculate = (battleground) => {
     if (copy.red.spend === copy.blue.spend) {
         copy.winner = 'draw';
     } else {
-        copy.winner = redSpend > blueSpend ? 'red' : 'blue';
+        // copy.winner = redSpend > blueSpend ? 'red' : 'blue';
     }
 
     copy.red.isOpen = battleground.red.users.length < battleground.limit;

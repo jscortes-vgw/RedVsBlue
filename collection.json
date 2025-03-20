@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "479fb1f2-0088-4873-8906-ab1f4e9558f6",
+		"name": "hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40829028"
+	},
+	"item": [
+		{
+			"name": "/battlegrounds",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/battlegrounds"
+			},
+			"response": []
+		},
+		{
+			"name": "/battlegrounds",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"start\": \"2025-03-20T01:00:00.000Z\",\n    \"end\": \"2025-03-20T02:00:00.000\",\n    \"limit\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8888/battlegrounds"
+			},
+			"response": []
+		},
+		{
+			"name": "/battlegrounds/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/battlegrounds/latest"
+			},
+			"response": []
+		},
+		{
+			"name": "/battlegrounds/{id}/teams/{name/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8888/battlegrounds/latest/teams/red/users"
+			},
+			"response": []
+		},
+		{
+			"name": "/battlegrounds/{id}/teams/{name/users Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"spend\": 1000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8888/battlegrounds/latest/teams/blue/users/1/spend"
+			},
+			"response": []
+		}
+	]
+}
