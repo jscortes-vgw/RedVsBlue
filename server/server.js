@@ -125,7 +125,9 @@ const calculate = (battleground) => {
     }
 
     copy.red.isOpen = battleground.red.users.length < battleground.limit;
-    copy.blue.isOpen = battleground.red.users.length < battleground.limit;
+    copy.blue.isOpen = battleground.blue.users.length < battleground.limit;
+
+    copy.isOpen = copy.red.isOpen || copy.blue.isOpen;
 
     return copy;
 }
