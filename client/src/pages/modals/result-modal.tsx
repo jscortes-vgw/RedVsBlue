@@ -117,7 +117,7 @@ const mockPlayersSpendingData = [
   {
     name: "C",
     team: "Red",
-    spending: 80,
+    spending: 1000,
   },
   {
     name: "D",

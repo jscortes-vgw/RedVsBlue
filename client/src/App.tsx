@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { ResultModal } from "./pages/modals/result-modal";
 
 export const App: React.FC = () => {
-  const [playerTeam, setPlayerTeam] = useState("Blue");
+  const [playerTeam, setPlayerTeam] = useState("Red");
   const [isResultModalOpen, setIsResultModalOpen] = useState<boolean>(false);
 
   return (
