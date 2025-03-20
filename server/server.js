@@ -1,10 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const { randomUUID } = require('crypto');
 
 const app = express();
 const PORT = 8888;
 
 const battlegrounds = [];
+
+app.use(cors());
 
 app.use(express.json());
 
