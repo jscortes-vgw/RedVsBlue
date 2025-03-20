@@ -113,16 +113,20 @@ app.listen(PORT, () => {
 });
 
 const calculate = (battleground) => {
-    const redSpend = battleground.red.users.reduce((acc, user) => acc + user.spend, 0);
-    const blueSpend = battleground.blue.users.reduce((acc, user) => acc + user.spend, 0);
     const copy = { ...battleground };
-    copy.red.spend = redSpend;
-    copy.blue.spend = blueSpend;
-    if (redSpend === blueSpend) {
+
+    copy.red.spend = battleground.red.users.reduce((acc, user) => acc + user.spend, 0);;
+    copy.blue.spend = battleground.blue.users.reduce((acc, user) => acc + user.spend, 0);;
+
+    if (copy.red.spend === copy.blue.spend) {
         copy.winner = 'draw';
     } else {
         copy.winner = redSpend > blueSpend ? 'red' : 'blue';
     }
+
+    copy.red.isOpen = battleground.red.users.length < battleground.limit;
+    copy.blue.isOpen = battleground.red.users.length < battleground.limit;
+
     return copy;
 }
 
