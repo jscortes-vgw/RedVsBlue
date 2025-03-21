@@ -1,0 +1,90 @@
+.logo{
+    width: 76.001px;
+    height: 73.765px;
+}
+
+.battleground-text{
+    color: var(--yellow-300, #FFDA00);
+    text-align: center;
+    font-family: Hind;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px; /* 112.5% */
+}
+
+.redvsblue-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    background-color: black;
+    border-radius: 8px;
+    
+}
+
+.red-text{
+    color: var(--primary-CC-Red, #E50047);
+    text-align: center;
+
+    /* Headings/H4 */
+    font-family: Hind;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px; /* 116.667% */
+}
+
+.vs-text{
+    color: var(--quest-quest-text-white, #FFF);
+
+    /* Headings/H4 */
+    font-family: Hind;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.blue-text{
+    color: var(--primary-CC-Blue, #007AFF);
+
+    /* Headings/H4 */
+    font-family: Hind;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.list-container{
+    border-radius: 8px;
+    background: var(--grey-700, black);
+}
+
+.main-container{
+    border-style: solid;
+    border-color: #FFDA00;
+    border-width: thick;
+}
+
+
+/* my team */
+
+.my-team-list-item{
+    /* justify-items: left; */
+    width: 100%;
+}
+
+.coins-spend{
+    color: #FFDA00;
+}
+
+.user-spend{
+    color: #a59d9d;
+}
+
+.MuiLinearProgress-bar{
+    background-color: orange !important;
+}

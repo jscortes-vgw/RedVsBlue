@@ -1,29 +1,36 @@
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import { styled } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import { Battleground, UsersEntity } from "./bg-types";
 import { getBattlegrounds, playRound } from "../../services";
+import logo from './../../assets/logo.png'
 
 interface ResultModalProps {
   open: boolean;
   currentTeam: string;
   handleClose: () => void;
+  setSnackOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setSnackText: React.Dispatch<React.SetStateAction<string>>
 }
 
 const boxStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
   textAlign: "center",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  bgcolor: '#3A393C',
+  color: 'white',
+  borderRadius: 2,
+  boxShadow: 24,
+  padding: 3,
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -47,7 +54,8 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 export const MyTeamModal = ({
   open,
   handleClose,
-  currentTeam,
+  setSnackOpen,
+  setSnackText
 }: ResultModalProps) => {
   const [playerSpendingDetails, setPlayerSpendingDetails] = useState<
     { id: number; spend: number }[]
@@ -59,6 +67,13 @@ export const MyTeamModal = ({
   const [currentGoal, setCurrentGoal] = useState<number>(0)
   const [teamHasWin, setTeamHasWin] = useState<boolean>(false)
   const totalSpending = 100000
+
+  useEffect(()=>{
+      if(teamHasWin == true){
+        setSnackText("Event has finished..")
+        setSnackOpen(true)
+      }
+    }, [teamHasWin])
 
   useEffect(() => {
     (async () => {
@@ -88,8 +103,8 @@ export const MyTeamModal = ({
     })();
 
     
-  // }, [battlegroundsData]);
-}, [battlegroundsData]);
+  }, [battlegroundsData]);
+// }, []);
 
 
   
@@ -123,34 +138,41 @@ export const MyTeamModal = ({
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Box sx={boxStyle}>
+      <Box sx={boxStyle} className='main-container'>
         {teamHasWin == false ?
         <>
-          <Typography variant='h6' component='h2'>
-            Red VS Blue
-          </Typography>
-          <Typography variant='h6' component='h2'>
-            100.000 Goal!
+          <Grid size={10} sx={{textAlign: 'center'}}>
+              <img src={logo} className='logo'/>
+          </Grid>
+          <Grid size={10} className={'redvsblue-container'}>
+            <Stack direction="row" spacing={1}>
+                <Typography variant='h6' component='h2' className='red-text'> Red</Typography>
+                <Typography variant='h6' component='h2' className='vs-text'> VS</Typography>
+                <Typography variant='h6' component='h2' className='blue-text'color='info'> Blue</Typography>
+            </Stack>
+          </Grid>
+          <Typography variant='h6' component='h2' className="coins-spend">
+            100.000 GC
           </Typography>
           <BorderLinearProgress
-            sx={{ margin: 1 }}
+            color="info"
+            sx={{ margin: 1, backgroundColor: '#7d6c4e' }}
             variant='determinate'
             value={teamPercentage}
           />
           <ol>
             {playerSpendingDetails.map((details, index) => (
-              <li key={index}>
+              <li key={index} className="my-team-list-item">
                 <Typography sx={{ mt: 2 }}>
-                  <span>{`User # ${details.id}`}</span> - <span>{details.spend}</span>&nbsp;&nbsp;
+                  <span className="user-spend">{`User # ${details.id}`}</span> - <span className="coins-spend">{details.spend}</span>&nbsp;&nbsp;
                   <Button disabled={teamHasWin} variant="contained" color="success" onClick={() => playRoundForPlayer(details.id, index)}>Play round</Button>
                 </Typography>
               </li>
-              
             ))}
           </ol>
         </>
          : <Typography variant='h6' component='h2'>
-         Red team Wins! 5000 SC divided in # of members
+         <span style={{color: 'red'}}>Red</span> team Wins! 5000 <span style={{color: '#17ee17'}}>SC</span> reward
        </Typography>}
         
         

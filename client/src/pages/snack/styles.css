@@ -1,0 +1,4 @@
+.snackbar{
+    border-radius: 16px;
+    background: var(--primary-CC-Blue, rgb(56 116 62));
+}

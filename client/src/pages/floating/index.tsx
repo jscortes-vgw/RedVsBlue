@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Fab, Menu, MenuItem, Button } from '@mui/material';
+import { Fab, Menu, MenuItem, Button, createStyles, makeStyles, keyframes } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
 import { getBattlegrounds } from '../../services';
+import './styles.css'
+import logo from './../../assets/logo.png'
 
 interface Props {
     isBgOpen: boolean
@@ -23,6 +25,22 @@ const FloatingButtonWithMenu: React.FC<Props> = ({setIsResultModalOpen, isBgOpen
         }
     })();
   }, [])
+
+  // Vibrant pulse animation
+  const pulse = keyframes`
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.7);
+    }
+    50% {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px 20px rgba(255, 105, 180, 0.3);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+    }
+  `;
 
   // Open menu
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -54,12 +72,16 @@ const FloatingButtonWithMenu: React.FC<Props> = ({setIsResultModalOpen, isBgOpen
           bottom: 20,
           right: 20,
           zIndex: 1000,
+          background: 'orange'          
         }}
-        sx={{'&:hover': {
+        sx={{
+            animation: `${pulse} 1.5s infinite`, // Apply the pulse animation
+            '&:hover': {
             bgcolor: green,
         },}}
       >
-        <AddIcon />
+        {/* <AddIcon /> */}
+        <img style={{width: '30px'}} src={logo} />
       </Fab>
 
       {/* Expanding Menu */}
